@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_KVM_on_PowerVM_PATH/package/qemu-l1/Config.in"

@@ -1,0 +1,9 @@
+[submodule "buildroot"]
+	path = buildroot
+	url = https://github.com/mikey/buildroot
+[submodule "qemu"]
+	path = qemu
+	url = https://github.com/mikey/qemu
+[submodule "linux"]
+	path = linux
+	url = https://github.com/mikey/linux

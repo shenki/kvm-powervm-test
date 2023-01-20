@@ -1,0 +1,6 @@
+config BR2_KVM_ON_POWERVM_L1
+       bool "KVM on PowerVM L1 platform"
+       default y
+       depends on BR2_powerpc64le
+
+source "$BR2_EXTERNAL_KVM_on_PowerVM_PATH/package/Config.in"

@@ -1,0 +1,20 @@
+name: 'test'
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 5'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: sudo apt update
+    - run: sudo apt install -y libelf-dev binutils-powerpc64le-linux-gnu gcc-powerpc64le-linux-gnu
+    - run: git submodule update --init --recursive
+    - run: ./make kvm_l1_defconfig
+    - run: ./make -j $(nproc)
+    - run: ./test_L1.sh

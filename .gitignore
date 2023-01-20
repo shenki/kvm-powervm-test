@@ -1,0 +1,8 @@
+output/*
+!output/local.mk
+overlay/rootfs.cpio
+overlay/vmlinux
+overlay/slof.bin
+overlay/qemu-system-ppc64
+overlay/.*
+overlay/tests/l2-*.log
