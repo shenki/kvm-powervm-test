@@ -4,8 +4,6 @@ scripts/copy_qemu.sh
 scripts/copy_images.sh
 
 N=$(nproc)
-nproc
-free
 
 output/build/host-qemu-custom/build/qemu-system-ppc64 -nographic \
   -machine pseries,cap-nested-hv=true -cpu POWER10 \
