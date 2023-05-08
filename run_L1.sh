@@ -6,7 +6,7 @@ scripts/copy_images.sh
 N=$(nproc)
 
 output/build/host-qemu-custom/build/qemu-system-ppc64 -nographic \
-  -machine pseries,cap-nested-hv=true -cpu POWER10 \
+  -machine pseries,cap-nested-papr=true -cpu POWER10 \
   -display none -vga none -m 4G -accel tcg,thread=multi \
   -serial mon:stdio \
   -smp cores=$N,maxcpus=$N,threads=1 \
