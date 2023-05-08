@@ -8,13 +8,25 @@ on:
 
 jobs:
 
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: sudo apt update
-    - run: sudo apt install -y libelf-dev binutils-powerpc64le-linux-gnu gcc-powerpc64le-linux-gnu
-    - run: git submodule update --init --recursive
-    - run: ./make kvm_l1_defconfig
-    - run: ./make -j $(nproc)
-    - run: ./test_L1.sh
+    - uses: actions/checkout@v3
+    - run: |
+        git submodule update --init --recursive
+        sudo apt update
+        sudo apt install -y libelf-dev binutils-powerpc64le-linux-gnu gcc-powerpc64le-linux-gnu
+        ls -al qemu linux buildroot
+        ./make kvm_l1_defconfig
+        ./make -j $(nproc)
+        ./test_L1.sh
+    - name: Kernel artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: vmlinux
+        path: output/images/vmlinux
+    - name: Rootfs artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: rootfs.cpio
+        path: output/images/rootfs.cpio
