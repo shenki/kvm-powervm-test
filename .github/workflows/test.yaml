@@ -1,4 +1,4 @@
-name: 'test'
+name: Build and test L2s
 
 on:
   push:
@@ -12,14 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: |
-        git submodule update --init --recursive
+    - name: Checkout git submodules
+      run: git submodule update --init --recursive
+    - name: Install Ubuntu packages
+      run: |
         sudo apt update
         sudo apt install -y libelf-dev binutils-powerpc64le-linux-gnu gcc-powerpc64le-linux-gnu
-        ls -al qemu linux buildroot
-        ./make kvm_l1_defconfig
-        ./make -j $(nproc)
-        ./test_L1.sh
+    - name: defconfig
+      run: ./make kvm_l1_defconfig
+    - name: Build
+      run: ./make -j $(nproc)
+    - name: Test
+      run: ./test_L1.sh
+
     - name: Kernel artifact
       uses: actions/upload-artifact@v3
       with:
