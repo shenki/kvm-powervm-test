@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Checkout git submodules
-      run: git submodule update --init --recursive
+      run: git submodule update --init --recursive --depth 10
     - name: Install Ubuntu packages
       run: |
         sudo apt update

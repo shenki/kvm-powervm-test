@@ -10,7 +10,7 @@ Usage
 
 **Building everything**
 
-1. `git submodule update --init --recursive`
+1. `git submodule update --init --recursive --depth 10`
 2. `./make kvm_l1_defconfig`
 3. `./make`
 
