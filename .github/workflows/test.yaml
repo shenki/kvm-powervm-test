@@ -21,7 +21,10 @@ jobs:
         sudo apt update
         sudo apt install -qq libelf-dev binutils-powerpc64le-linux-gnu gcc-powerpc64le-linux-gnu
     - name: defconfig
-      run: ./make kvm_l1_defconfig
+      run: |
+        ./make kvm_l1_defconfig
+        ./buildroot/utils/config --file output/.config -e BR2_TOOLCHAIN_EXTERNAL
+        ./make olddefconfig
     - name: Build
       run: ./make -j $(nproc)
     - name: Test
